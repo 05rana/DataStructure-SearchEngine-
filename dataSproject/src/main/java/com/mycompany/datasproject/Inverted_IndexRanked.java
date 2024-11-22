@@ -4,6 +4,9 @@
  */
 package com.mycompany.datasproject;
 
+import com.mycompany.datasproject.LinkedList;
+import com.mycompany.datasproject.Vocabulary;
+
 import java.util.Arrays;
 
 /**

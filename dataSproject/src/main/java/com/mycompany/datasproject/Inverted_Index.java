@@ -7,6 +7,13 @@ Inverted Index: A mapping from terms (unique words) to a list of documents conta
 those terms. Both of Index and Inverted Index will be implemented using list of lists.
 */
 
+
+
+/*
+Inverted Index: A mapping from terms (unique words) to a list of documents containing 
+those terms. Both of Index and Inverted Index will be implemented using list of lists.
+*/
+
 public class Inverted_Index {
 
     // Linked list to hold the inverted index

@@ -4,6 +4,8 @@
  */
 package com.mycompany.datasproject;
 
+import com.mycompany.datasproject.Vocabulary;
+
 /**
  *
  * @author 1234

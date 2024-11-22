@@ -4,6 +4,9 @@
  */
 package com.mycompany.datasproject;
 
+import com.mycompany.datasproject.AVLTree;
+
+
 /**
  *
  * @author 1234
@@ -81,11 +84,11 @@ public boolean addNew(int docID, String word) {
         }
         public void printDocument()
         {
-                AVLrank.retrieve();
+                AVLrank.Traverse();
         }
 
         //=================================================================
-public void TF(String str) {
+/*public void TF(String str) {
     // Convert string to lowercase and remove leading/trailing spaces
     str = str.toLowerCase().trim();
     // Split the string into words
@@ -110,7 +113,26 @@ public void TF(String str) {
             freqs[index].f = count;
             index++;
         }
-    }
+    }*/
+        public void TF(String str)
+        {
+            str = str.toLowerCase().trim();
+            String [] words = str.split(" ");
+            
+            int index = 0;
+            for ( int docID = 0 ; docID < 50 ; docID++ )
+            {
+                int count = 0 ;
+                for ( int j = 0 ;j < words.length ; j++ )
+                    count += this.getrank(docID, words[j]);
+                if (count > 0)
+                {
+                    freqs[index] = new frequency();
+                    freqs[index].docID = docID;
+                    freqs[index].f = count;
+                    index ++;
+                }
+            }
 
     // Sort the frequencies in descending order
     mergesort(freqs, 0, index - 1);

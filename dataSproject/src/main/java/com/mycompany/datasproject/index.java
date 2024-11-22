@@ -3,6 +3,11 @@ package com.mycompany.datasproject;
 /**
  * Index: A mapping from document IDs to a list of words contained in the document.
  */
+
+
+
+//Index: A mapping from document IDs to a list of words contained in the document.
+
 public class index {
 
     // Inner class to represent a document

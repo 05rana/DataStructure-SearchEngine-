@@ -1,5 +1,7 @@
 package com.mycompany.datasproject;
 
+
+
 public class Vocabulary {
     public String word;
 

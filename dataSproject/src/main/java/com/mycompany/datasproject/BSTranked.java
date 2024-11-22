@@ -8,7 +8,7 @@ package com.mycompany.datasproject;
  *
  * @author 1234
  */
-public class BSTRanked {
+public class Inverted_Index_BSTRanked {
             class frequency
             {
                 int docID = 0;
@@ -83,7 +83,7 @@ public boolean addNew(int docID, String word) {
         }
 
         //=================================================================
-public void terFreq(String str) {
+public void TF(String str) {
     str = str.toLowerCase().trim();
     String[] words = str.split(" ");
 

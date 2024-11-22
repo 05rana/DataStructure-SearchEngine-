@@ -10,6 +10,10 @@ package com.mycompany.datasproject;
  */
 import java.util.*;
 
+
+
+import java.util.*;
+
 // Generic Node class to represent a node in a linked list
  class Node<T> {
 
@@ -171,3 +175,4 @@ public class LinkedList<T> {
         System.out.println("null"); // Indicate the end of the list
     }
 }
+
