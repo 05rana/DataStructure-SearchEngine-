@@ -56,7 +56,7 @@ public class Inverted_Index_AVL {
     }
 
     // Print the documents in the inverted index (traverse the AVL Tree)
-    public void printDocument() {
+    public void PrintData() {
         invertedindexAVL.Traverse();
     }
 

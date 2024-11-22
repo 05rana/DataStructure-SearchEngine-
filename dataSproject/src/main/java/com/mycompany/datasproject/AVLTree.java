@@ -330,4 +330,61 @@ public class AVLTree<K extends Comparable<K>, T>{
             traverseTree( node.right);
             
         }
+        
+        //=========================================================================== 
+       public void TraverseT()
+        {
+            if (root != null)
+                traverseTreeT(root);
+        }
+        
+        private void traverseTreeT (AVLNode<K,T> node)
+        {
+            if (node == null)
+                return;
+            traverseTreeT( node.left );
+            if (node.getData() instanceof AVLTree )
+            {
+                System.out.println( "Node key ==== "+ node.key);
+                ((AVLTree <String,Rank>) node.getData()).Traverse();
+            }
+            else
+                System.out.println(node.data);
+            
+            traverseTreeT( node.right);
+            
+        }
+        
+       //=========================================================================== 
+       public void PrintData()
+        {
+            if (root != null)
+                PrintData_(root);
+        }
+        
+        private void PrintData_ (AVLNode<K,T> node)
+        {
+            if (node == null)
+                return;
+            PrintData_( node.left );
+           
+           System.out.print(node.key);
+            if (node.getData() instanceof Term )
+            {
+                System.out.print("   docs: ");
+                boolean [] docs = ((Term) node.data).getDocs();
+                for ( int i  = 0 ; i < 50 ; i++)
+                    if ( docs[i])
+                        System.out.print( " " + i + " " );
+                System.out.println("");
+            }
+                
+            
+            PrintData_( node.right);
+            
+        }
+
+        
+        
+
 }

@@ -8,8 +8,9 @@ package com.mycompany.datasproject;
  *
  * @author 1234
  */
-public class Inverted_Index_BSTRanked {
-            class frequency
+public class BSTranked {
+
+    public class frequency
             {
                 int docID = 0;
                 int f = 0;
@@ -18,47 +19,47 @@ public class Inverted_Index_BSTRanked {
            BST <Integer, BST <String,Rank>> BSTrank; 
            frequency [] freqs = new frequency[50];
             
-            
-            
-            public BSTRanked() {
-                BSTrank = new BST <Integer, BST <String,Rank>>();
-                
-            }
-
-public boolean addNew(int docID, String word) {
-    // Case 1: If BSTrank is empty, create and insert a new document with the word
-    if (BSTrank.empty()) {
-        BST<String, Rank> miniRank = new BST<String, Rank>();
-        miniRank.insert(word, new Rank(word, 1));
-        BSTrank.insert(docID, miniRank);
-        return true;
+    public BSTranked() {
+         BSTrank = new BST<Integer, BST<String, Rank>>();
     }
-
-    // Case 2: If the document exists in BSTrank
-    if (BSTrank.find(docID)) {
-        BST<String, Rank> miniRank = BSTrank.retrieve();
-
-        // Case 2.1: If the word exists, increment its rank
-        if (miniRank.find(word)) {
-            Rank rank = miniRank.retrieve();
-            rank.add_Rank();
-            miniRank.update(rank);
-            BSTrank.update(miniRank);
-            return false; // Word already exists, no new insertion
+    
+    public boolean addNew (int docID, String word)
+            {
+               if (BSTrank.empty())
+               {
+                   BST <String,Rank> miniRank= new BST <String,Rank>();
+                   miniRank.insert(word, new Rank (word,1));
+                   
+                   BSTrank.insert(docID, miniRank);
+                   return true;
+               }
+               else
+               {
+                    if (BSTrank.find(docID))
+                    {
+                        BST <String,Rank> miniRank= BSTrank.retrieve();
+                        if (miniRank.find(word))
+                        {
+                            // document available , word avialble // rank ++
+                            Rank rank = miniRank.retrieve();
+                            rank.add_Rank();
+                            miniRank.update(rank);
+                            BSTrank.update(miniRank);
+                            return false;
+                        }
+                        //  document available , word unavailable 
+                        miniRank.insert(word, new Rank (word , 1));
+                        BSTrank.update(miniRank);
+                        return true;
+                    }
+                    // document unavailable 
+                   BST <String,Rank> miniRank= new BST <String,Rank>();
+                   miniRank.insert(word, new Rank (word,1));
+                   
+                   BSTrank.insert(docID, miniRank);
+                   return true;
+               }
         }
-
-        // Case 2.2: If the word doesn't exist, insert it with initial rank
-        miniRank.insert(word, new Rank(word, 1));
-        BSTrank.update(miniRank);
-        return true; // Word added
-    }
-
-    // Case 3: If the document doesn't exist, create a new one and insert the word
-    BST<String, Rank> miniRank = new BST<String, Rank>();
-    miniRank.insert(word, new Rank(word, 1));
-    BSTrank.insert(docID, miniRank);
-    return true;
-}
 
         public boolean found(int docID, String word)
         {
@@ -83,87 +84,66 @@ public boolean addNew(int docID, String word) {
         }
 
         //=================================================================
-public void TF(String str) {
-    str = str.toLowerCase().trim();
-    String[] words = str.split(" ");
-
-    int index = 0;
-
-    // Iterate through all documents
-    for (int docID = 0; docID < 50; docID++) {
-        int count = 0;
-
-        // Count occurrences of words in the document
-        for (String word : words) {
-            count += this.getrank(docID, word);
+        public void TF(String str)
+        {
+            str = str.toLowerCase().trim();
+            String [] words = str.split(" ");
+            
+            int index = 0;
+            for ( int docID = 0 ; docID < 50 ; docID++ )
+            {
+                int count = 0 ;
+                for ( int j = 0 ;j < words.length ; j++ )
+                    count += this.getrank(docID, words[j]);
+                if (count > 0)
+                {
+                    freqs[index] = new frequency();
+                    freqs[index].docID = docID;
+                    freqs[index].f = count;
+                    index ++;
+                }
+            }
+            
+            mergesort(freqs, 0, index-1 );
+                
+            for ( int x = 0 ; x < index ; x++)
+                System.out.println(freqs[x].docID + "\t\t" + freqs[x].f);
         }
-
-        // If any word is found, store the document ID and frequency
-        if (count > 0) {
-            freqs[index] = new frequency();
-            freqs[index].docID = docID;
-            freqs[index].f = count;
-            index++;
-        }
-    }
-
-    // Sort the frequencies in descending order
-    mergesort(freqs, 0, index - 1);
-
-    // Print the document IDs and their frequencies
-    for (int i = 0; i < index; i++) {
-        System.out.println(freqs[i].docID + "\t\t" + freqs[i].f);
-    }
-}
-
 
          //=================================================================
-public static void sortByFrequency(frequency[] A, int l, int r) {
-    // Base case: when the array has one or no element
-    if (l < r) {
-        int m = (l + r) / 2;
-        
-        // Recursively sort the two halves
-        sortByFrequency(A, l, m);
-        sortByFrequency(A, m + 1, r);
-        
-        // Merge the two sorted halves
-        mergeSortedFrequencies(A, l, m, r);
+    public static void mergesort ( frequency [] A , int l , int r ) 
+    {
+        if ( l >= r )
+            return;
+        int m = ( l + r ) / 2;
+        mergesort (A , l , m ) ;          // Sort first half
+        mergesort (A , m + 1 , r ) ;    // Sort second half
+        merge (A , l , m , r ) ;            // Merge
     }
-}
 
-private static void mergeSortedFrequencies(frequency[] A, int l, int m, int r) {
-    int leftSize = m - l + 1;
-    int rightSize = r - m;
-
-    frequency[] left = new frequency[leftSize];
-    frequency[] right = new frequency[rightSize];
-
-    // Copy data to temporary arrays
-    System.arraycopy(A, l, left, 0, leftSize);
-    System.arraycopy(A, m + 1, right, 0, rightSize);
-
-    int i = 0, j = 0, k = l;
-
-    // Merge the two arrays while maintaining order
-    while (i < leftSize && j < rightSize) {
-        if (left[i].f >= right[j].f) {
-            A[k++] = left[i++];
-        } else {
-            A[k++] = right[j++];
+    private static void merge ( frequency [] A , int l , int m , int r ) 
+    {
+        frequency [] B = new frequency [ r - l + 1];
+        int i = l , j = m + 1 , k = 0;
+    
+        while ( i <= m && j <= r )
+        {
+            if ( A [ i ].f >= A [ j ].f)
+                B [ k ++] = A [ i ++];
+            else
+                B [ k ++] = A [ j ++];
         }
+        
+        if ( i > m )
+            while ( j <= r )
+                B [ k ++] = A [ j ++];
+        else
+            while ( i <= m )
+                B [ k ++] = A [ i ++];
+        
+        for ( k = 0; k < B . length ; k ++)
+            A [ k + l ] = B [ k ];
     }
-
-    // Copy remaining elements of left[] if any
-    while (i < leftSize) {
-        A[k++] = left[i++];
-    }
-
-    // Copy remaining elements of right[] if any
-    while (j < rightSize) {
-        A[k++] = right[j++];
-    }
-}
-
-
+  
+    
 }
