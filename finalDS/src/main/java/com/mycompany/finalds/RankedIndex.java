@@ -31,7 +31,7 @@ public class RankedIndex {
             index.insert(word);
         }
 
-        public boolean found(String word) {
+        public boolean ISfound(String word) {
             if (index.empty()) return false;
 
             index.findFirst();
@@ -61,28 +61,7 @@ public class RankedIndex {
         indexes[docID].add(data);
     }
 
-    public void printDocument(int docID) {
-        if (indexes[docID].index.empty()) {
-            System.out.println("Empty Document");
-            return;
-        }
 
-        indexes[docID].index.findFirst();
-        while (true) {
-            System.out.print(indexes[docID].index.retrieve() + " ");
-            if (indexes[docID].index.last()) break;
-            indexes[docID].index.findNext();
-        }
-        System.out.println();
-    }
-
-    public boolean[] getDocs(String str) {
-        boolean[] result = new boolean[50];
-        for (int i = 0; i < result.length; i++) {
-            result[i] = indexes[i].found(str);
-        }
-        return result;
-    }
 
     public void TF(String str) {
         str = str.toLowerCase().trim();

@@ -17,7 +17,7 @@ public class Term {
     }
 
     // Adds a document ID to docIDS if it doesn't already exist
-    public boolean add_docID(int docID) {
+    public boolean adddocID(int docID) {
         if (!docIDS[docID]) {
             docIDS[docID] = true;
             return true; // Successfully added
@@ -30,10 +30,7 @@ public class Term {
         this.word = word;
     }
 
-    // Retrieves the vocabulary
-    public Vocabulary getVocabulary() {
-        return word;
-    }
+
 
     // Returns a copy of the docIDS array
     public boolean[] getDocs() {

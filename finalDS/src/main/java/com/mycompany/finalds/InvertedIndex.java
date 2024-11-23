@@ -8,9 +8,7 @@ public class InvertedIndex {
         invertedindex = new LinkedList<>();
     }
 
-    public int size() {
-        return invertedindex.size();
-    }
+
 
     public boolean addDoc(int docID, String word) {
         if (invertedindex.empty()) {
@@ -22,7 +20,7 @@ public class InvertedIndex {
         while (true) {
             Term currentTerm = invertedindex.retrieve();
             if (currentTerm.word.word.equals(word)) {
-                currentTerm.add_docID(docID);
+                currentTerm.adddocID(docID);
                 invertedindex.update(currentTerm);
                 return false; // Word already exists, docID updated
             }
@@ -82,25 +80,14 @@ public class InvertedIndex {
         return result;
     }
 
-    public void printDocment() {
-        if (invertedindex.empty()) {
-            System.out.println("Empty Inverted Index");
-        } else {
-            invertedindex.findFirst();
-            while (true) {
-                System.out.println(invertedindex.retrieve());
-                if (invertedindex.last()) break;
-                invertedindex.findNext();
-            }
-        }
-    }
+
 
     // =====================================================================
 
     private Term createTerm(int docID, String word) {
         Term term = new Term();
         term.setVocabulary(new Vocabulary(word));
-        term.add_docID(docID);
+        term.adddocID(docID);
         return term;
     }
 

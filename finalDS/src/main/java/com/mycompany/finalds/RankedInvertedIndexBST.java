@@ -57,10 +57,6 @@ public class RankedInvertedIndexBST {
         return 0;
     }
 
-    // Print all documents and their rankings
-    public void printDocs() {
-        BSTrank.TraverseT();
-    }
 
     // Calculate Term Frequency (TF) for a string
     public void TF(String str) {

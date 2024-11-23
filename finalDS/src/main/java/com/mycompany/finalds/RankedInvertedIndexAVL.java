@@ -48,10 +48,6 @@ public class RankedInvertedIndexAVL {
         return 0;
     }
 
-    // Print all documents and their rankings
-    public void printDocs() {
-        AVLrank.Traverse();
-    }
 
     // Calculate Term Frequency (TF) for a string
     public void TF(String str) {

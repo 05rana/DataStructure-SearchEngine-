@@ -28,10 +28,7 @@ public class TermRank {
         this.word = word;
     }
 
-    // Retrieve the vocabulary for the term
-    public Vocabulary getVocabulary() {
-        return this.word;
-    }
+
 
     // Return a copy of the docIDS array
     public int[] getDocs() {

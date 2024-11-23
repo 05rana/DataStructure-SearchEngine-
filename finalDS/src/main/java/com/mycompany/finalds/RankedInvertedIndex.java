@@ -16,9 +16,7 @@ public class RankedInvertedIndex {
         initializeFrequencies();
     }
 
-    public int size() {
-        return invertedindex.size();
-    }
+
 
     public boolean addDoc(int docID, String word) {
         if (invertedindex.empty()) {
@@ -57,18 +55,7 @@ public class RankedInvertedIndex {
         return false;
     }
 
-    public void printDocs() {
-        if (invertedindex.empty()) {
-            System.out.println("Empty Inverted Index");
-        } else {
-            invertedindex.findFirst();
-            while (true) {
-                System.out.println(invertedindex.retrieve());
-                if (invertedindex.last()) break;
-                invertedindex.findNext();
-            }
-        }
-    }
+
 
     public void TF(String str) {
         str = str.toLowerCase().trim();

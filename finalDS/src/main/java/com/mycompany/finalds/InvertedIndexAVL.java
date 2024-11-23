@@ -20,7 +20,7 @@ public class InvertedIndexAVL {
 
         if (invertedindexAVL.find(word)) {
             Term term = invertedindexAVL.retrieve();
-            term.add_docID(docID);
+            term.adddocID(docID);
             invertedindexAVL.update(term);
             return false; // Word already exists; docID updated
         }
@@ -33,9 +33,6 @@ public class InvertedIndexAVL {
         return invertedindexAVL.find(word);
     }
 
-    public void printDocs() {
-        invertedindexAVL.Traverse();
-    }
 
     public boolean[] AndOrFunc(String str) {
         str = str.toLowerCase().trim();
@@ -75,7 +72,7 @@ public class InvertedIndexAVL {
     private Term createTerm(int docID, String word) {
         Term term = new Term();
         term.setVocabulary(new Vocabulary(word));
-        term.add_docID(docID);
+        term.adddocID(docID);
         return term;
     }
 

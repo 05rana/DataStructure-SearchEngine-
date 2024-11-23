@@ -11,16 +11,13 @@ public class InvertedIndexBST {
         count = 0;
     }
 
-    // Get the size of the index
-    public int size() {
-        return count;
-    }
+  
 
     // Add a new word to the index
     public boolean addDoc(int docID, String word) {
         if (invertedindexBST.find(word)) {
             Term term = invertedindexBST.retrieve();
-            term.add_docID(docID);
+            term.adddocID(docID);
             invertedindexBST.update(term);
             return false; // Word already exists; updated docID
         }
@@ -120,7 +117,7 @@ public class InvertedIndexBST {
     private Term createTerm(int docID, String word) {
         Term term = new Term();
         term.setVocabulary(new Vocabulary(word));
-        term.add_docID(docID);
+        term.adddocID(docID);
         return term;
     }
 }
